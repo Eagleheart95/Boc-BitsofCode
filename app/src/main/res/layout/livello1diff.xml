@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Seleziona la difficoltà"
+        android:textSize="36dp"
+        android:textAlignment="center"
+        android:textColor="#000000"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Normale"
+        android:textSize="50dp"
+        android:textColor="#64dd17"
+        android:id="@+id/normal"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Medio"
+        android:textSize="50dp"
+        android:textColor="#ffd600"
+        android:id="@+id/medium"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Difficile"
+        android:textSize="50dp"
+        android:textColor="#d50000"
+        android:id="@+id/hard"/>
+
+
+</LinearLayout>

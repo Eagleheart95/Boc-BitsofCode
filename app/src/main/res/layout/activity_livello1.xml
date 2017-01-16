@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.andrea.boc_bitsofcode.Livello1"
+    android:background="#795548"
+    >
+
+
+    <Button
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="INT"
+            android:textSize="16pt"
+            android:textColor="#fff"
+            android:id="@+id/interi"
+            android:background="#00BCD4"
+            android:fontFamily="Roboto"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="47dp" />
+
+    <Button
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="FLOAT"
+            android:textSize="16pt"
+            android:textColor="#fff"
+            android:id="@+id/reali"
+            android:background="#FF5722"
+            android:fontFamily="Roboto"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+        android:layout_alignBaseline="@+id/interi"
+        android:layout_alignBottom="@+id/interi"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text"
+        android:textColor="#FFEB3B"
+        android:text="prova"
+        android:fontFamily="Roboto"
+        android:textSize="28pt"
+        android:background="#33ffffff"
+        android:padding="12dp"
+        android:layout_marginTop="83dp"
+        android:layout_below="@+id/interi"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:text="BOOL"
+        android:textSize="16pt"
+        android:textColor="#fff"
+        android:id="@+id/booleani"
+        android:background="#9C27B0"
+        android:fontFamily="Roboto"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+
+        android:layout_alignBaseline="@+id/stringa"
+        android:layout_alignBottom="@+id/stringa"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:text="STRING"
+            android:textSize="16pt"
+            android:textColor="#fff"
+            android:id="@+id/stringa"
+            android:background="#8BC34A"
+            android:fontFamily="Comics Sans MS"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+        android:layout_marginBottom="63dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+</RelativeLayout>
+
+
+
+
+
+
+
