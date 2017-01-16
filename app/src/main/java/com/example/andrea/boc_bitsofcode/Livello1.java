@@ -3,14 +3,13 @@ package com.example.andrea.boc_bitsofcode;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class Livello1 extends AppCompatActivity {
@@ -26,7 +25,10 @@ public class Livello1 extends AppCompatActivity {
     private GeneratoreCasuale generatore = new GeneratoreCasuale(); //genera casualmente gli oggetti di tipo Tipo appoggiandosi alla classe Random
     Vibrator vi;
     static boolean daActivity=false;
-    Timer timer;
+    CountDownTimer timer;
+    Thread thread; // per il continuo aggiornamento del dato fluttuante
+    Boolean dx = true; // per lo spostamento sul piano orizzontale
+    Boolean su = true; // per lo spostamento sul piano verticale
 
 
 
@@ -42,9 +44,53 @@ public class Livello1 extends AppCompatActivity {
         reali=(Button) findViewById(R.id.reali);
         stringhe=(Button) findViewById(R.id.stringa);
         booleani=(Button) findViewById(R.id.booleani);
-        timer = new Timer();
         polloFritto= generatore.genera(); //genero il primo valore che dovrà essere valutato dall' utente
         text.setText(""+polloFritto.valore); //stampo il valore generato
+
+        timer = new CountDownTimer(500, 100) { //Inizializzo il timer per la gestione del cambiamento di colore
+            @Override
+            public void onTick(long millisUntilFinished) {
+                text.setTextColor(Color.RED);
+            }
+
+            @Override
+            public void onFinish() {
+                text.setTextColor(Color.parseColor("#FFEB3B"));
+            }
+        };
+
+        thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    while (!isInterrupted()) {
+                        Thread.sleep(100);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // si muove piano piano in orizzontale
+                                if (text.getX()<=390 && dx)
+                                    text.setX(text.getX()+1);
+                                else
+                                if (text.getX()>=340 && !dx)
+                                    text.setX(text.getX()-1);
+                                else dx = !dx;
+
+                                // si muove piano piano in verticale
+                                if (text.getY()<=530 && su)
+                                    text.setY(text.getY()+1);
+                                else
+                                if (text.getY()>=520 && !su)
+                                    text.setY(text.getY()-1);
+                                else su = !su;
+                            }
+                        });
+                    }
+                } catch (InterruptedException e) {
+                }
+            }
+        };
+        thread.start();
 
 
         interi.setOnClickListener(new View.OnClickListener() {
@@ -64,10 +110,11 @@ public class Livello1 extends AppCompatActivity {
                     }
                 }
                 else{ //se la risposta è sbagliata
+                    timer.start(); //cambio il colore del font per 1/2 secondo
                     vi.vibrate(500); //vibra
                     serie=0; //azzero la serie
-                    }
                 }
+            }
         });
 
         reali.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +133,7 @@ public class Livello1 extends AppCompatActivity {
                     }
                 }
                 else{
+                    timer.start();
                     vi.vibrate(500); //vibra
                     serie=0;
                 }
@@ -108,6 +156,7 @@ public class Livello1 extends AppCompatActivity {
                     }
                 }
                 else{
+                    timer.start();
                     vi.vibrate(500); //vibra
                     serie=0;
                 }
@@ -129,6 +178,7 @@ public class Livello1 extends AppCompatActivity {
                     }
                 }
                 else {
+                    timer.start();
                     vi.vibrate(500); //vibra
                     serie=0;
                 }
