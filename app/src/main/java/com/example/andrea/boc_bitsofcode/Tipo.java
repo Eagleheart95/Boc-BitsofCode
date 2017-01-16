@@ -14,12 +14,12 @@ public class Tipo {
         this.tipo = tipo;
 
         if (tipo.equals("int")){ //creo i dati di tipo int
-            buffInt = random.nextInt()%1000;
+            buffInt = abs(random.nextInt())%1000;
             valore= buffInt.toString();
         }
 
         if(tipo.equals("float")) { // creo i dati di tipo float/double TO DO: troppi decimali, trova il modo di sistemarli
-            buffFloat= random.nextFloat();
+            buffFloat=(float)(abs(random.nextInt())%100000)/100;
             valore= buffFloat.toString();
         }
 
@@ -58,8 +58,8 @@ public class Tipo {
                 case 10:
                     valore="''Kaffééééééééé''";
                     break;
-                    }
-                }
+            }
+        }
 
         if(tipo.equals("booleani")){ //creo i dati booleani
             if(random.nextBoolean()){
@@ -78,6 +78,13 @@ public class Tipo {
 
     public String getTipo(){
         return tipo;
+    }
+
+    private int abs (int x){
+        if(x<0){
+            return -x;
+        }
+        return x;
     }
 }
 
