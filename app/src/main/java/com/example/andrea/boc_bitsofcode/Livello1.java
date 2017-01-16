@@ -29,26 +29,11 @@ public class Livello1 extends AppCompatActivity {
     Vibrator vi;
     static boolean daActivity=false;
     CountDownTimer timer;
-    Thread thread; // per il continuo aggiornamento del dato fluttuante
-    Boolean dx = true; // per lo spostamento sul piano orizzontale
-    Boolean su = true; // per lo spostamento sul piano verticale
-    Display display;
-    Point size;
-    int max_width;
-    int max_height;
-    int angolo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livello1);
-
-        display = getWindowManager().getDefaultDisplay();
-        size = new Point();
-        display.getSize(size);
-        max_width = size.x;
-        max_height = size.y;
-        angolo = 0;
 
         vi=(Vibrator) getSystemService(VIBRATOR_SERVICE); //inizializzo la vibrazione
 
@@ -59,6 +44,7 @@ public class Livello1 extends AppCompatActivity {
         booleani=(Button) findViewById(R.id.booleani);
         polloFritto= generatore.genera(); //genero il primo valore che dovrà essere valutato dall' utente
         text.setText(""+polloFritto.valore); //stampo il valore generato
+
 
         timer = new CountDownTimer(500, 100) { //Inizializzo il timer per la gestione del cambiamento di colore
             @Override
@@ -72,34 +58,6 @@ public class Livello1 extends AppCompatActivity {
             }
         };
 
-        // movimento del dato
-        thread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    while (!isInterrupted()) {
-                        Thread.sleep(100);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (angolo<360) angolo++;
-                                else angolo=0;
-
-                                int coseno = ((int) Math.cos(Math.toRadians(angolo)));
-                                int seno = ((int) Math.sin(Math.toRadians(angolo)));
-
-                                // si muove piano piano in orizzontale
-                                text.setX(max_width/3 + coseno*max_width/4);
-                                // si muove piano piano in verticale
-                                text.setY(max_height/3 + seno*max_width/4);
-                            }
-                        });
-                    }
-                } catch (InterruptedException e) {
-                }
-            }
-        };
-        thread.start();
 
 
         // controllo sul bottone cliccato
