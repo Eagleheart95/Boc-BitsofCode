@@ -55,4 +55,17 @@ public class NewContinue extends AppCompatActivity{
 
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        if((slot1.exists()||slot2.exists()||slot3.exists())){ //se non ci sono salvataggi disattivo i tasti continua e duello
+            continua.setEnabled(true);
+            duello.setEnabled(true);
+        }
+
+
+    }
+
+
 }
