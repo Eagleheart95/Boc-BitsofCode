@@ -7,9 +7,12 @@ import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.graphics.Point;
+import java.lang.Math;
 
 
 public class Livello1 extends AppCompatActivity {
@@ -29,13 +32,23 @@ public class Livello1 extends AppCompatActivity {
     Thread thread; // per il continuo aggiornamento del dato fluttuante
     Boolean dx = true; // per lo spostamento sul piano orizzontale
     Boolean su = true; // per lo spostamento sul piano verticale
-
-
+    Display display;
+    Point size;
+    int max_width;
+    int max_height;
+    int angolo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_livello1);
+
+        display = getWindowManager().getDefaultDisplay();
+        size = new Point();
+        display.getSize(size);
+        max_width = size.x;
+        max_height = size.y;
+        angolo = 0;
 
         vi=(Vibrator) getSystemService(VIBRATOR_SERVICE); //inizializzo la vibrazione
 
@@ -59,6 +72,7 @@ public class Livello1 extends AppCompatActivity {
             }
         };
 
+        // movimento del dato
         thread = new Thread() {
             @Override
             public void run() {
@@ -68,21 +82,16 @@ public class Livello1 extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                // si muove piano piano in orizzontale
-                                if (text.getX()<=390 && dx)
-                                    text.setX(text.getX()+1);
-                                else
-                                if (text.getX()>=340 && !dx)
-                                    text.setX(text.getX()-1);
-                                else dx = !dx;
+                                if (angolo<360) angolo++;
+                                else angolo=0;
 
+                                int coseno = ((int) Math.cos(Math.toRadians(angolo)));
+                                int seno = ((int) Math.sin(Math.toRadians(angolo)));
+
+                                // si muove piano piano in orizzontale
+                                text.setX(max_width/3 + coseno*max_width/4);
                                 // si muove piano piano in verticale
-                                if (text.getY()<=530 && su)
-                                    text.setY(text.getY()+1);
-                                else
-                                if (text.getY()>=520 && !su)
-                                    text.setY(text.getY()-1);
-                                else su = !su;
+                                text.setY(max_height/3 + seno*max_width/4);
                             }
                         });
                     }
@@ -93,6 +102,7 @@ public class Livello1 extends AppCompatActivity {
         thread.start();
 
 
+        // controllo sul bottone cliccato
         interi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {   //controllo se è stato premuto il bottone int e decido cosa fare
