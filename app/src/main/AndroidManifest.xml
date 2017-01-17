@@ -25,6 +25,10 @@
         <activity android:name=".CaricaProfilo"/>
         <activity android:name=".SelezionaSlotDaScrivere"/>
         <activity android:name=".CreaProfilo"/>
+        <activity android:name=".Livello1Medium"/>
+        <activity android:name=".Vittoria1Media"/>
+        <activity android:name=".Livello2"/>
+
     </application>
 
 </manifest>

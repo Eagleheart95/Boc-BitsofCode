@@ -22,9 +22,14 @@ public class Livello1diff extends AppCompatActivity{
         facile.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Livello1.daActivity=false;//rendo avviabile il livello uno difficoltà normale
-                Livello1.punteggio=0;//mi assicuro che il conteggio del punteggio parta effettivamente da 0
-                startActivity(new Intent(Livello1diff.this, Livello1.class)); //avvio il livello uno
+                if (MenuLivelli.entra==2) {
+                    startActivity(new Intent(Livello1diff.this, Livello2.class));
+                    finish();
+
+                }else{
+                    Livello1.daActivity=false;//rendo avviabile il livello uno difficoltà normale
+                    Livello1.punteggio=0;//mi assicuro che il conteggio del punteggio parta effettivamente da 0
+                    startActivity(new Intent(Livello1diff.this, Livello1.class));} //avvio il livello uno
                 finish(); //chiudo quest' activity ormai inutile
             }
         });
@@ -32,7 +37,17 @@ public class Livello1diff extends AppCompatActivity{
         medio.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                // TODO: crea la difficoltà media del livello 1
+                if (MenuLivelli.entra==2) {
+                    /*startActivity(new Intent(Livello1diff.this, Livello2medio.class));
+                      finish(); */
+                    //TODO: ogni volta che avviate un livello, mettete finish() in modo che poi quest'activity si chiuda, altrimenti a fine livello viene di nuovo visualizzata
+                }else{
+                    Livello1Medium.daActivity=false;
+                    Livello1Medium.punteggio=0;
+                    startActivity(new Intent(Livello1diff.this, Livello1Medium.class));
+                    finish();
+                }
+
             }
         });
 

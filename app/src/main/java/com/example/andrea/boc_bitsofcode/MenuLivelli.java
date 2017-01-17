@@ -21,6 +21,8 @@ public class MenuLivelli extends AppCompatActivity{
     public static Utente giocatore;
     File salvataggio;
 
+    public static int entra = 1; //ANTIBUG: di default entro al livello 1 (sempre meglio che far piantare l' applicazione)
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -32,8 +34,10 @@ public class MenuLivelli extends AppCompatActivity{
         punteggi=(Button) findViewById(R.id.punteggi);
         salvataggio=(File)getIntent().getSerializableExtra("salvataggio");
 
+
+
         try{
-        giocatore=new Utente(new BufferedReader(new FileReader(salvataggio.getPath())));
+            giocatore=new Utente(new BufferedReader(new FileReader(salvataggio.getPath())));
         }
         catch(FileNotFoundException e){
             Toast.makeText(MenuLivelli.this, "Impossibile caricare il profilo, il file risulta assente", Toast.LENGTH_LONG).show();
@@ -45,10 +49,18 @@ public class MenuLivelli extends AppCompatActivity{
         uno.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                entra = 1;
                 startActivity(new Intent(MenuLivelli.this, Livello1diff.class)); //Faccio scegliere la difficoltà del primo livello
             }
         });
 
+
+        due.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                entra = 2;
+                startActivity(new Intent(MenuLivelli.this,Livello1diff.class));
+            }
+        });
         //TODO: IMPLEMENTARE QUELLO CHE DEVONO FARE GLI ALTRI BOTTONI
 
     }
