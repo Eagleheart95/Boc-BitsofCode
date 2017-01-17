@@ -28,6 +28,7 @@ public class Utente {
                 superati[i].normale=Integer.parseInt(r.readLine());
                 superati[i].medio=Integer.parseInt(r.readLine());
                 superati[i].difficile=Integer.parseInt(r.readLine());
+                superati[i].impossibile=Integer.parseInt(r.readLine());
             }
 
         }
@@ -49,7 +50,7 @@ public class Utente {
             writer = new BufferedWriter(new FileWriter(file.getPath()));
             writer.write(nome+"\n");
             for(int i=0; i<MenuLivelli.nLivelli; i++){
-                writer.write(superati[i].normale+"\n"+superati[i].medio+"\n"+superati[i].difficile+"\n");
+                writer.write(superati[i].normale+"\n"+superati[i].medio+"\n"+superati[i].difficile+"\n"+superati[i].impossibile+"\n");
             }
             writer.close();
         }
